@@ -14,15 +14,32 @@ set shiftwidth=2 ##amount of spaces during indentation
 ```
 
 For Bash 
+(can update in bashrc file also)
+```
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+source ~/.bashrc
+```
+Aliases
 ```
 alias k='kubectl'
-alias kdp='kubectl describe pod'
 alias ke='kubectl explain'
-alias kc='kubectl create -f'
-alias kgp='kubectl get pods --show-labels'
+alias kcf='kubectl create -f'
+alias kaf='kubectl apply -f'
+alias kgp='kubectl get pods'
+alias kgpa='kubectl get pods --all-namespaces'
+alias kgd='kubectl get deployments'
+alias kgs='kubectl get service'
+alias kgh='kubectl get hpa'
+alias kdp='kubectl describe pod'
 alias kr='kubectl replace -f'
 alias kn='kubectl get namespaces'
 ```
+
+# Delete resources
+alias kd='kubectl delete'
+alias kdp='kubectl delete pods'
+alias kdd='kubectl delete deployments'
+alias kgs='kubectl delete service'
 
 
 # Cluster Info and Commands
@@ -63,6 +80,29 @@ List API versions
 $ k api-versions
 ```
 
+# Cluster Contexts
+Get List contexts
+```
+$ k config get-contexts
+```
+
+Get Current Current ( Display the current-context)
+```
+$ k config current-context
+```
+
+Switch between Clusters 
+```
+$ k config use-context 
+$ k config set-context (first time setting a context)
+```
+
+Get kubeadm config
+```
+$ k -n kube-system get configmap kubeadm-config -o yaml
+```
+
+
 Pods Creation 
 ```
 k run test-pod --image=redis 
@@ -70,3 +110,24 @@ k run test-pod --image=redis --command -- sleep 1000
 k run test-pod --image=redis --lables=pod=test,id=test
 k run test-pod --image=redis --command -- 'echo' 'echo no need' 'echo bye'
 ```
+
+
+Validate Manifest File 
+```
+k create --dry-run --validate -f <file>.yaml
+```
+
+
+Drain a node 
+```
+k drain <node-name> --ignore-daemonsets=true
+```
+
+Apply yaml files and folders
+```
+k apply -f file-name.yaml
+k apply -f file-name.json
+k apply -R -f . # If files are in current working directory
+k apply -R -f /path/to/yaml/files
+```
+
