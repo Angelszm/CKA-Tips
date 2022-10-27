@@ -41,6 +41,31 @@ alias kdp='kubectl delete pods'
 alias kdd='kubectl delete deployments'
 alias kgs='kubectl delete service'
 
+# Export to save time
+```
+export do="--dry-run=client -o yaml"
+export now="--force --grace-period 0"
+```
+
+# Log locations to check:
+```
+/var/log/pods
+/var/log/containers
+crictl ps + crictl logs
+docker ps + docker logs (in case when Docker is used)
+kubelet logs: /var/log/syslog or journalctl
+```
+
+## Config File Locations to check 
+```
+Kubelet Config files
+/var/lib/kubelet
+```
+
+Weave Network Plugin Location
+```
+/etc/cni/net.d/--weave--
+```
 
 
 ## Cluster Version Upgrade with kubeadm 
@@ -56,6 +81,7 @@ apt-mark kubeadm kubelet kubectl
 apt-get update 
 apt-get install -y kubelet=1.24.0-00 kubeadm=1.24.0-00 kubectl=1.24.0-00
 apt-mark hold kubelet kubectl kubeadm
+kubeadm upgrade apply v1.24.0
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 ```
@@ -145,6 +171,7 @@ k exec --stdin --tty test-pod -- ls -l /etc/hosts
 k exec --stdin --tty test-pod -- apt update
 k exec --stdin --tty test-pod -- cat /etc/os-release
 k exec --stdin --tty test-pod -- env
+
 ```
 
 
@@ -157,6 +184,11 @@ k explain deploy.spec
 k explain deploy.spec.replicas
 k explain pod.metadata.namespace
 k explain deploy.spec.template.spec.tolerations
+k explain pod.spec //View the pod spec definition
+k explain pod.spec.containers //View the containers definition
+k explain pod.spec.containers.resources //View the container resources definition
+k explain pod.spec.containers.resources.limits //View the containter resources limits definition
+k explain pod --recursive | less -S
 ```
 
 Deployments 
@@ -266,6 +298,7 @@ k logs pod-name
 k logs deploy/name
 k logs pod-name | grep 'error'
 k logs pod-name --previous
+k logs etcd-master
 ```
 
 
@@ -279,6 +312,8 @@ k top pod -l 'app=nginx' --sort-by='cpu'
 Labels
 ```
 k label nodes <node-name> <label-key>=<label-value>
+k get all --show-labels
+
 ```
 
 
@@ -296,5 +331,41 @@ k exec -i -t dnsutils -- nslookup
 k exec -i -t dnsutils -- sh
 k exec -i -t dnsutils -- cat /etc/resolv.conf
 k get endpoints kube-dns --namespace=kube-system
-
 ```
+
+
+# Debugging Pods, Containers, Nodes with Crictl command
+```
+crictl ps
+crictl images
+crictl container_id logs
+crictl inspect container_id
+crictl exec -i -t container_id ls
+crictl stop container_id
+crictl rm container_id
+```
+
+Custom-Columns
+```
+kubectl get test -o=custom-columns=NAME:.metadata.name,HANDLER:.spec.runtimeHandler,TIMESTAMP:.metadata.creationTimestamp
+```
+
+
+## ETCD_BACKUP
+ETCD Member List
+```
+ETCDCTL_API=3 etcdctl \
+ --endpoints=https://127.0.0.1:2379 \
+ --cacert=/etc/etcd/pki/ca.pem \
+ --cert=/etc/etcd/pki/etcd.pem \
+ --key=/etc/etcd/pki/etcd-key.pem \
+  member list
+```
+
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+--cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save /opt/cluser.db
+
+
+ETCDCTL_API=3 etcdctl --endpoints=https://10.1.220.8:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+     --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
+   snapshot save /opt/cluster1.db
