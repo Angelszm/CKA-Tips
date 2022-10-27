@@ -42,6 +42,24 @@ alias kdd='kubectl delete deployments'
 alias kgs='kubectl delete service'
 
 
+
+## Cluster Version Upgrade with kubeadm 
+
+Ref: https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/
+Drain the node frist
+```
+k drain node --ignore-daemonsets
+```
+Upgrade steps
+```
+apt-mark kubeadm kubelet kubectl 
+apt-get update 
+apt-get install -y kubelet=1.24.0-00 kubeadm=1.24.0-00 kubectl=1.24.0-00
+apt-mark hold kubelet kubectl kubeadm
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+```
+
 # Cluster Info and Commands
 Display Kubernetes API Server URL
 ```
@@ -160,9 +178,27 @@ k create --dry-run --validate -f <file>.yaml
 ```
 
 
-Drain a node 
+Drain a node (Unschedule)
 ```
 k drain <node-name> --ignore-daemonsets=true
+k drain  <node-name> --ignore-daemonsets
+```
+
+
+Stop scheduling new pods onto the node:
+```
+k cordon node-name
+```
+
+Resume scheduling on the node
+```
+k uncordon node-name
+```
+
+Namespaces 
+```
+k create ns 
+k get ns
 ```
 
 Apply yaml files and folders
@@ -173,20 +209,92 @@ k apply -R -f . # If files are in current working directory
 k apply -R -f /path/to/yaml/files
 ```
 
-Namespaces 
+Expose Pod or Deployment on Services 
 ```
-k create ns 
-k get ns
+k expose -h
+k expose deploy nginx --port=80 --type=ClusterIP
+k expose deployment nginx --port=80 --type=NodePort
+k expose deployment nginx --port=80 --type=NodePort (if we have to expose nodeport and then add nodePort field in yaml file)
+k expose pod redis --port=6379 --name=redis
+k expose pod redis  --type=ClusterIP --port=6379 --target-port=6379
 ```
 
+Scale Replicas
+```
+k scale --replicas=4 deploy nginx
+k edit deploy nginx (#modify replicas number) 
+```
+
+Update Deployment with record flag & Rollback
+```
+k set image deployment web nginx=nginx:1.14.2 --record
+k rollout undo deployment web
+k rollout undo deployment/web --to-revision=3
+```
 
 Service Accounts 
 ```
-
+k create sa demo
 ```
 
+
+## 4 different RBAC combinations and 3 valid ones:
+Role + RoleBinding (available in single Namespace, applied in single Namespace)
+ClusterRole + ClusterRoleBinding (available cluster-wide, applied cluster-wide)
+ClusterRole + RoleBinding (available cluster-wide, applied in single Namespace)
+Role + ClusterRoleBinding (NOT POSSIBLE: available in single Namespace, applied cluster-wide)
 
 Roles, Rolebinding, ClusterRole and Clusterrolebinding
 ```
+k create role demo --verb=get,list,watch --resource=pods,deploy,ds,rs,sts
+k create clusterrole demo --verb='*' --resource=pods,deploy,ds,rs,sts
+k create clusterrole demo --verb=get,list,watch --resource=pods,deploy,ds,rs,sts
+k create rolebinding demo --role=demo --user=demo
+k create rolebinding demo --clusterrole==demo --user=demo
+k create clusterrolebinding demo-admin --clusterrole=demo --user=demo
+```
+
+Authentication Check: 
+```
+k auth can-i create deployment --as demo
+```
+
+
+Logging 
+```
+k logs pod-name
+k logs deploy/name
+k logs pod-name | grep 'error'
+k logs pod-name --previous
+```
+
+
+Metrics Server: 
+```
+k top pod 
+k top pod --sort-by='cpu'
+k top pod -l 'app=nginx' --sort-by='cpu'
+```
+
+Labels
+```
+k label nodes <node-name> <label-key>=<label-value>
+```
+
+
+Copy files to and from pods
+```
+k cp --help
+k cp mypod1:/dump_ops_in_flight.txt dump_ops_in_flight.txt
+```
+
+
+DNS Debugging 
+```
+k get pods dnsutils
+k exec -i -t dnsutils -- nslookup  
+k exec -i -t dnsutils -- sh
+k exec -i -t dnsutils -- cat /etc/resolv.conf
+k get endpoints kube-dns --namespace=kube-system
 
 ```
