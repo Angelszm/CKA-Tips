@@ -25,33 +25,35 @@ alias kn='kubectl get namespaces'
 ```
 
 
-# Display Kubernetes API Server URL
+# Cluster Info and Commands
+Display Kubernetes API Server URL
 $ k cluster-info
 
-# Dump all cluster information
+Dump all cluster information
 $ k cluster-info dump
 
-# Get kubeadm config
+Get kubeadm config
 $ k -n kube-system get configmap kubeadm-config -o yaml
 
-# List all nodes in the cluster
+List all nodes in the cluster
 $ k get nodes
 
-# Check health of cluster components [Like Controller Manager, Scheduler, ETCD Server etc]
+Check health of cluster components [Like Controller Manager, Scheduler, ETCD Server etc]
 $ k get componentstatuses
 $ k get cs
 
-# List all API resources {}
+List all API resources {}
 $ k api-resources
 $ k api-resources --namespaced=true {Print related all namespaces resources}
 
-# List API versions
+List API versions
 $ k api-versions
 
 
 Pods Creation 
+```
 k run test-pod --image=redis 
 k run test-pod --image=redis --command -- sleep 1000
 k run test-pod --image=redis --lables=pod=test,id=test
 k run test-pod --image=redis --command -- 'echo' 'echo no need' 'echo bye'
-
+```
