@@ -109,8 +109,50 @@ k run test-pod --image=redis
 k run test-pod --image=redis --command -- sleep 1000
 k run test-pod --image=redis --lables=pod=test,id=test
 k run test-pod --image=redis --command -- 'echo' 'echo no need' 'echo bye'
+k run test-pod --image=busybox --command -- 'sh' '-c' 'wget ...'
+k run test-pod --image=busybox --command -- '/bin/sleep' '1d'
+k run --rm -it --image=alpine alpine -- sh (# for testing purpose and will die after exit)
+k run nginx --image=nginx --restart=Never --dry-run=client -o yaml
+k run nginx --image=nginx --restart=Never --limits='cpu=300m,memory=512Mi' --dry-run=client -o yaml
+k run nginx --image=nginx --restart=Never --requests='cpu=100m,memory=256Mi' --limits='cpu=300m,memory=512Mi' --dry-run=client -o yaml
+
 ```
 
+Shell Session to the Pod: (exec commands)
+```
+k exec --stdin --tty test-pod -- sh
+k exec --stdin --tty test-pod -- /bin/bash
+k exec --stdin --tty test-pod -- nslookup 
+k exec --stdin --tty test-pod -- ls -l /etc/hosts
+k exec --stdin --tty test-pod -- apt update
+k exec --stdin --tty test-pod -- cat /etc/os-release
+k exec --stdin --tty test-pod -- env
+```
+
+
+Explain Resources 
+```
+k explain pod
+k explain deploy
+k explain service
+k explain deploy.spec
+k explain deploy.spec.replicas
+k explain pod.metadata.namespace
+k explain deploy.spec.template.spec.tolerations
+```
+
+Deployments 
+```
+k create deploy nginx --image=nginx  --replicas=3 --dry-run=client -o yaml
+k create deploy nginx --image=nginx  --replicas=3 --dry-run=client -o yaml >nginx-deployment.yml
+
+
+```
+
+Sort-By
+```
+k get svc --sort-by=.metadata.name --all-namespaces
+```
 
 Validate Manifest File 
 ```
@@ -131,3 +173,20 @@ k apply -R -f . # If files are in current working directory
 k apply -R -f /path/to/yaml/files
 ```
 
+Namespaces 
+```
+k create ns 
+k get ns
+```
+
+
+Service Accounts 
+```
+
+```
+
+
+Roles, Rolebinding, ClusterRole and Clusterrolebinding
+```
+
+```
