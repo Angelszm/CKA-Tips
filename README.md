@@ -369,3 +369,12 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernete
 ETCDCTL_API=3 etcdctl --endpoints=https://10.1.220.8:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt \
      --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
    snapshot save /opt/cluster1.db
+   
+   
+   
+   
+   CNI File Path
+   ```
+   /opt/cni/bin
+   /etc/cni/net.d/10-flannel.conflist
+   ```
