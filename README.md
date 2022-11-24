@@ -371,10 +371,12 @@ ETCDCTL_API=3 etcdctl --endpoints=https://10.1.220.8:2379 --cacert=/etc/kubernet
      --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
    snapshot save /opt/cluster1.db
    
+Be Fast 
+k delete pod x --grace-period 0 --force
+
    
    
-   
-   CNI File Path
+CNI File Path
    ```
    /opt/cni/bin
    /etc/cni/net.d/10-flannel.conflist
