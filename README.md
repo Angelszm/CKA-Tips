@@ -250,6 +250,7 @@ k expose deployment nginx --port=80 --type=NodePort
 k expose deployment nginx --port=80 --type=NodePort (if we have to expose nodeport and then add nodePort field in yaml file)
 k expose pod redis --port=6379 --name=redis
 k expose pod redis  --type=ClusterIP --port=6379 --target-port=6379
+k -n namespace expose pod pod --name service --port 3000 --target-port 80
 ```
 
 Scale Replicas
@@ -344,11 +345,18 @@ crictl inspect container_id
 crictl exec -i -t container_id ls
 crictl stop container_id
 crictl rm container_id
+crictl logs container_id
 ```
 
 Custom-Columns
 ```
 kubectl get test -o=custom-columns=NAME:.metadata.name,HANDLER:.spec.runtimeHandler,TIMESTAMP:.metadata.creationTimestamp
+```
+
+To test RBAC Setup
+```
+k auth can-i get secret --as system:serviceaccount:project-ns:sa-name
+k auth can-i -h
 ```
 
 
@@ -371,10 +379,17 @@ ETCDCTL_API=3 etcdctl --endpoints=https://10.1.220.8:2379 --cacert=/etc/kubernet
      --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
    snapshot save /opt/cluster1.db
    
-Be Fast 
+###Be Fast 
+```
 k delete pod x --grace-period 0 --force
+k api-resources
+```
 
-   
+##Cert
+```
+openssl x509  -noout -text -in /etc/kubernetes/pki/etcd/server.crt
+kubeadm certs check-expiration | grep apiserver
+``` 
    
 CNI File Path
    ```
