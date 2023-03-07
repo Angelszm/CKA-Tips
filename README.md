@@ -396,3 +396,23 @@ CNI File Path
    /opt/cni/bin
    /etc/cni/net.d/10-flannel.conflist
    ```
+
+
+
+
+Other K8s Collections
+- https://www.circonus.com/2020/12/12-critical-kubernetes-health-conditions-you-need-to-monitor-and-why/
+- https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4
+- https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/
+- https://devopscube.com/kubernetes-ingress-tutorial/
+- https://awstip.com/why-i-stumbled-upon-confluence-between-aws-load-balancers-and-kubernetes-service-c8603537ac9b
+- https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/
+- https://www.cybereason.com/blog/how-to-prevent-out-of-memory-in-java-based-kubernetes-pods
+- https://medium.com/@vipinvkmenon/running-kubectl-commands-within-a-kubernetes-job-439ed4852f68
+- https://abvijaykumar.medium.com/chapter-9-observability-metrics-prometheus-grafana-alert-manager-slack-notifications-b5dcac31b462
+-
+- https://blog.ovhcloud.com/getting-external-traffic-into-kubernetes-clusterip-nodeport-loadbalancer-and-ingress/#:~:text=To%20reach%20the%20ClusterIp%20from%20an%20external%20computer%2C%20you%20can,(ClusterIp)%20for%20that%20Service%20
+- https://neo4j.com/developer-blog/deploying-neo4j-on-kubernetes-with-helm-charts/
+- https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/integrations/external_dns/
+- https://iximiuz.com/
+- https://learnk8s.io/kubernetes-network-packets
