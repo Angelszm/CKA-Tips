@@ -416,3 +416,24 @@ Other K8s Collections
 - https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/integrations/external_dns/
 - https://iximiuz.com/
 - https://learnk8s.io/kubernetes-network-packets
+
+
+
+
+
+
+
+## Other k8s useful commands
+Namespace 
+```
+kubectl delete ns <namespace> --grace-period=0 --force
+kubectl delete ns [name]
+kubectl get ns [name] -o json > tmp.json
+
+#Remove “kubernetes” from tmp.json
+- kubectl proxy
+test on new tab
+- curl -k -H “Content-Type: application/json” -X PUT --data-binary @tmp.json 
+- http://127.0.0.1:8001/api/v1/namespaces/[ns'sname]/finalize
+- kubectl get ns [name]
+```
