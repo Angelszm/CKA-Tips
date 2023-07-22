@@ -437,3 +437,8 @@ test on new tab
 - http://127.0.0.1:8001/api/v1/namespaces/[ns'sname]/finalize
 - kubectl get ns [name]
 ```
+
+
+
+Kubernetes API-Resources
+https://miro.com/app/board/uXjVM0ChERI=/?share_link_id=419864773272
