@@ -444,9 +444,10 @@ test on new tab
 ### Kubernetes API-Resources
 ```
 - https://miro.com/app/board/uXjVM0ChERI=/?share_link_id=419864773272
-![image](https://github.com/Angelszm/CKA-Tips/assets/30867160/788b857f-a80c-4d25-ae3e-63d198c69957)
-
 ```
+API Resources with Namespace (true/false)
+- ![image](https://github.com/Angelszm/CKA-Tips/assets/30867160/788b857f-a80c-4d25-ae3e-63d198c69957)
+
 
 ### Kubernetes with Kind Clusters, demoapp, istio bookinof, sock-shop etc 
 - ![k8s-s1-Book Demo drawio](https://github.com/Angelszm/CKA-Tips/assets/30867160/d5dc7fc0-93ec-441e-9c5f-27deee00cf69)
