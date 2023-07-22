@@ -422,7 +422,8 @@ Other K8s Collections
 
 
 
-
+----------------------------------------------------
+Optional
 ## Other k8s useful commands
 Namespace 
 ```
@@ -440,5 +441,14 @@ test on new tab
 
 
 
-Kubernetes API-Resources
-https://miro.com/app/board/uXjVM0ChERI=/?share_link_id=419864773272
+### Kubernetes API-Resources
+```
+- https://miro.com/app/board/uXjVM0ChERI=/?share_link_id=419864773272
+![image](https://github.com/Angelszm/CKA-Tips/assets/30867160/788b857f-a80c-4d25-ae3e-63d198c69957)
+
+```
+
+### Kubernetes with Kind Clusters, demoapp, istio bookinof, sock-shop etc 
+- ![k8s-s1-Book Demo drawio](https://github.com/Angelszm/CKA-Tips/assets/30867160/d5dc7fc0-93ec-441e-9c5f-27deee00cf69)
+- ![k8s-s1-Google Cloud Microservice Demo drawio](https://github.com/Angelszm/CKA-Tips/assets/30867160/7d439f2e-444d-4021-a194-c4d45d97ea44)
+
