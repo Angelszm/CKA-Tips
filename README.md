@@ -336,7 +336,9 @@ k get endpoints kube-dns --namespace=kube-system
 ```
 
 
-# Debugging Pods, Containers, Nodes with Crictl command
+## Debugging Pods, Containers, Nodes with Crictl command
+<img width="1388" alt="image" src="https://github.com/Angelszm/CKA-Tips/assets/30867160/b98b728b-cea0-4194-ac4b-73c1f416f5a9">
+
 ```
 crictl ps
 crictl images
@@ -361,7 +363,7 @@ k auth can-i -h
 
 
 ## ETCD_BACKUP
-ETCD Member List
+- ETCD Member List
 ```
 ETCDCTL_API=3 etcdctl \
  --endpoints=https://127.0.0.1:2379 \
