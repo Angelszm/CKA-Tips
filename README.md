@@ -453,3 +453,11 @@ API Resources with Namespace (true/false)
 - ![k8s-s1-Book Demo drawio](https://github.com/Angelszm/CKA-Tips/assets/30867160/d5dc7fc0-93ec-441e-9c5f-27deee00cf69)
 - ![k8s-s1-Google Cloud Microservice Demo drawio](https://github.com/Angelszm/CKA-Tips/assets/30867160/7d439f2e-444d-4021-a194-c4d45d97ea44)
 
+
+- Kubernetes CRDs with ArgoCD, Istio-system, Certmanager and metallb
+- ![Uploading image (5).png…]()
+- ![Uploading image (4).png…]()
+- ![Uploading image (6).png…]()
+- ![image (3)](https://github.com/Angelszm/CKA-Tips/assets/30867160/afbeac7f-d91d-4ed7-a08e-2c9423bfb276)
+
+
