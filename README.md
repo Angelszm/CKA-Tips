@@ -456,10 +456,13 @@ API Resources with Namespace (true/false)
 
 ### Kubernetes CRDs with ArgoCD, Istio-system, Certmanager and metallb
 
-- ![image (3)](https://github.com/Angelszm/CKA-Tips/assets/30867160/afbeac7f-d91d-4ed7-a08e-2c9423bfb276)
-- ![image (4)](https://github.com/Angelszm/CKA-Tips/assets/30867160/4d9398f7-18a3-4700-adf2-02d740854b65)
-- ![image (5)](https://github.com/Angelszm/CKA-Tips/assets/30867160/cf5b6bf9-964b-426c-bbe8-86ba8119651a)
-- ![image (6)](https://github.com/Angelszm/CKA-Tips/assets/30867160/c6be5dcd-7555-4022-8927-c62570d986a2)
+-  ![image (3)](https://github.com/Angelszm/CKA-Tips/assets/30867160/afbeac7f-d91d-4ed7-a08e-2c9423bfb276)
+  
+-  ![image (4)](https://github.com/Angelszm/CKA-Tips/assets/30867160/4d9398f7-18a3-4700-adf2-02d740854b65)
+  
+-  ![image (5)](https://github.com/Angelszm/CKA-Tips/assets/30867160/cf5b6bf9-964b-426c-bbe8-86ba8119651a)
+ 
+-  ![image (6)](https://github.com/Angelszm/CKA-Tips/assets/30867160/c6be5dcd-7555-4022-8927-c62570d986a2)
 
 
 
