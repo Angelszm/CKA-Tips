@@ -4,7 +4,8 @@
 
 ## Firstly need to setup vim and bash settings on playground. 
 
-
+## Mind Mapping 
+- https://miro.com/app/board/uXjVM0ChERI=/?share_link_id=419864773272
 
 For Vim 
 ```
