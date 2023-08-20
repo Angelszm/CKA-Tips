@@ -474,3 +474,65 @@ API Resources with Namespace (true/false)
 
 
 
+
+### Other Helm knowledge
+
+- 3 steps to decode helm secrets
+```
+- base64 decode - Kubernetes secrets encoding
+- base64 decode (again) - Helm encoding
+- gzip decompress - Helm zipping
+
+
+- kubectl get secrets sh.helm.release.v1.microservice.v1 -o json | jq .data.release | tr -d '"' | base64 -d | base64 -d | gzip -d | jq
+- kubectl get secrets sh.helm.release.v1.microservice.v1 -o jsonpath='{.data.release}' | base64 -d | base64 -d | gzip -d | jq
+- kubectl get secrets sh.helm.release.v1.microservice.v1 -o go-template='{{.data.release | base64decode | base64decode}}' | gzip -d | jq
+```
+
+## Title: HELM Commands
+Description: The command returns the values set in the chart's values.yaml file, which specifies the configuration settings for the chart.
+```
+helm search repo rancher --versions
+helm repo list
+helm repo
+helm repo add
+helm search repo
+helm search repo rancher -l
+helm ls -A
+helm create
+helm install
+helm list -A
+helm get manifest
+helm get manifest microservice
+helm get manifest [RELEASE NAME] --revision
+helm install --debug --dry-run microservice-helm ./yourchartname
+helm install microservice ./currency-app -f values-usd.yaml --dry-run
+helm pull stable/mysql
+helm pull <chart-name>
+helm debug my-release -n my-namespace
+helm install <release-name> <package-path>
+helm delete my-release -n my-namespace
+helm upgrade my-release ./my-chart -n my-namespace
+```
+
+
+## Title: HELM Values
+Description: The command returns the values set in the chart's values.yaml file, which specifies the configuration settings for the chart.
+```
+helm get values [RELEASE NAME] --revision
+helm get values [RELEASE NAME]
+helm get values ed
+helm get values rancher -n cattle-system
+helm get values rancher -n cattle-system
+```
+
+
+## Title: HELM Rollback & History 
+Description: The following commands can be used for rolling back Helm releases.
+```
+helm rollback rancher 1 -n cattle-system {{Roll Back Revisison 1}}
+helm rollback ingress-nginx 1 -n ingress-nginx
+helm rollback <RELEASE> [REVISION]
+helm history currency-usd-microservice
+```
+
