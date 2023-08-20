@@ -534,5 +534,6 @@ helm rollback rancher 1 -n cattle-system {{Roll Back Revisison 1}}
 helm rollback ingress-nginx 1 -n ingress-nginx
 helm rollback <RELEASE> [REVISION]
 helm history currency-usd-microservice
+helm history 
 ```
 
